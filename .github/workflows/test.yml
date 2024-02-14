@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  combined_job:
+    name: Validate terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checks terraform syntax
+        run: terraform validate
