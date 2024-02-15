@@ -26,9 +26,9 @@ resource "google_compute_subnetwork" "subnet_2" {
 }
 
 # Adding route
-# resource "google_compute_route" "route_for_webapp_subnet" {
-#     name = "webapp-subnet-route"
-#     dest_range = "0.0.0.0/0"
-#     network = google_compute_subnetwork.subnet_1.id
-#     next_hop_ip = "10.0.0.1"
-# }
+resource "google_compute_route" "route_for_webapp_subnet" {
+    name = "webapp-subnet-route"
+    dest_range = "0.0.0.0/0"
+    network = google_compute_network.vpc_network.id
+    next_hop_gateway = "default-internet-gateway"
+}
