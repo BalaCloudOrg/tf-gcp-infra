@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: checkout tf code
-        run: actions/checkout@v2
+        uses: actions/checkout@v2
         
       - name: checks terraform syntax
         run: terraform validate
