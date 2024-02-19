@@ -6,3 +6,4 @@ to run:
 - terraform plan
 - terraform init
 - terraform apply
+ 
