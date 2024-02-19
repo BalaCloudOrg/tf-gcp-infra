@@ -13,3 +13,4 @@ jobs:
     steps:
       - name: checks terraform syntax
         run: terraform validate
+        run: exit 1
