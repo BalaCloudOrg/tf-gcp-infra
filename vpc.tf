@@ -1,5 +1,5 @@
 # VPC creation
-resource "google_compute_network" "vpc_network" {
+resource "google_comput_network" "vpc_network" {
     name = var.vpc_name
     auto_create_subnetworks = false
     routing_mode = "REGIONAL"
