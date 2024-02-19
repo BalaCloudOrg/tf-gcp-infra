@@ -13,3 +13,9 @@ jobs:
     steps:
       - name: checks terraform syntax
         run: terraform validate
+
+      - name: terraform
+        run: terraform version
+
+      - name: tf
+        run: which terraform
