@@ -27,3 +27,4 @@ resource "google_compute_route" "route_for_vpc" {
     network = google_compute_network.vpc_network.id
     next_hop_gateway = "default-internet-gateway"
 }
+
