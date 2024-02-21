@@ -6,8 +6,8 @@ resource "google_compute_instance" "vm_instance" {
   boot_disk {
     initialize_params {
       image = var.custom_image_self_link
-      type  = "pd-balanced"
-      size  = 100
+      type  = var.custom_image_type
+      size  = var.custom_image_size
     }
   }
 
@@ -20,10 +20,10 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
-  tags = ["web-app"]
-  depends_on = [ google_compute_address.static, google_compute_network.vpc_network, google_compute_subnetwork.subnet_webapp ]
+  tags       = [var.compute_instance_tag]
+  depends_on = [google_compute_address.static, google_compute_network.vpc_network, google_compute_subnetwork.subnet_webapp]
 }
 
 resource "google_compute_address" "static" {
-  name = "ipv4-address"
+  name = var.external_ip_add_range
 }
