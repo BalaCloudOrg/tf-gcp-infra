@@ -85,3 +85,40 @@ variable "firewall_name_deny_ssh" {
   description = "The name of the webapp firewall which denies ssh traffic"
   type        = string
 }
+
+variable "custom_image_type" {
+  description = "The type of the custom image"
+  type        = string
+  default     = "pd-balanced"
+}
+
+variable "custom_image_size" {
+  description = "The size of the custom image"
+  type        = number
+  default     = 100
+}
+
+variable "external_ip_add_range" {
+  type    = string
+  default = "ipv4-address"
+}
+
+variable "firewall_source_range" {
+  type    = string
+  default = "0.0.0.0/0"
+}
+
+variable "compute_instance_tag" {
+  type    = string
+  default = "web-app"
+}
+
+variable "ssh_port" {
+  type    = number
+  default = 22
+}
+
+variable "tcp_protocol" {
+  type    = string
+  default = "tcp"
+}

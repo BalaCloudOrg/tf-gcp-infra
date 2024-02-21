@@ -3,14 +3,14 @@ resource "google_compute_firewall" "allow_webapp_traffic" {
   network = google_compute_network.vpc_network.name
 
   allow {
-    protocol = "tcp"
+    protocol = var.tcp_protocol
     ports    = ["${var.application_port}"]
   }
 
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["web-app"]
+  source_ranges = [var.firewall_source_range]
+  target_tags   = [var.compute_instance_tag]
 
-  depends_on = [ google_compute_network.vpc_network ]
+  depends_on = [google_compute_network.vpc_network]
 }
 
 resource "google_compute_firewall" "deny_ssh" {
@@ -18,12 +18,12 @@ resource "google_compute_firewall" "deny_ssh" {
   network = google_compute_network.vpc_network.name
 
   deny {
-    protocol = "tcp"
-    ports    = ["22"]
+    protocol = var.tcp_protocol
+    ports    = ["${var.ssh_port}"]
   }
 
-  source_ranges = ["0.0.0.0/0"]
-#   target_tags   = ["web-app"]
+  source_ranges = [var.firewall_source_range]
+  target_tags   = [var.compute_instance_tag]
 
-  depends_on = [ google_compute_network.vpc_network ]
+  depends_on = [google_compute_network.vpc_network]
 }
