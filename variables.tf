@@ -54,7 +54,7 @@ variable "application_port" {
   default     = 3000
 }
 
-variable "custom_image_self_link" {
+variable "custom_image_family" {
   description = "The self-link of the custom image for the Compute Engine instance."
   type        = string
 }
