@@ -5,7 +5,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = var.custom_image_self_link
+      image = var.custom_image_family
       type  = var.custom_image_type
       size  = var.custom_image_size
     }

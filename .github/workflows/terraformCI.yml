@@ -1,4 +1,4 @@
-name: CI
+name: Terraform CI
 
 on:
   pull_request:
@@ -14,8 +14,17 @@ jobs:
       - name: checkout tf code
         uses: actions/checkout@v2
 
+      - name: Verifies the format of terraform files
+        run: |
+          if terraform fmt -check .; then
+              echo "All files are correctly formatted."
+          else
+              echo "::error::Terraform files need to be formatted."
+              exit 1
+          fi
+
       - name: initiates terraform
         run: terraform init
-        
+
       - name: checks terraform syntax
         run: terraform validate
