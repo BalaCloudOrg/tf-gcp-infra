@@ -16,14 +16,10 @@ resource "google_compute_instance" "vm_instance" {
     subnetwork = google_compute_subnetwork.subnet_webapp.id
 
     access_config {
-      nat_ip = google_compute_address.static.address
+        # automatically assign an ephipheral ip address - an external ip to access your VM
     }
   }
 
   tags       = [var.compute_instance_tag]
-  depends_on = [google_compute_address.static, google_compute_network.vpc_network, google_compute_subnetwork.subnet_webapp]
-}
-
-resource "google_compute_address" "static" {
-  name = var.external_ip_add_range
+  depends_on = [google_compute_network.vpc_network, google_compute_subnetwork.subnet_webapp]
 }
