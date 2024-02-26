@@ -98,11 +98,6 @@ variable "custom_image_size" {
   default     = 100
 }
 
-variable "external_ip_add_range" {
-  type    = string
-  default = "ipv4-address"
-}
-
 variable "firewall_source_range" {
   type    = string
   default = "0.0.0.0/0"
