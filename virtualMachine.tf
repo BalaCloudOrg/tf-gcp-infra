@@ -24,12 +24,16 @@ resource "google_compute_instance" "vm_instance" {
     startup-script = <<-EOT
     #!/bin/bash
     # Create a configuration file for the database
-    cat <<EOF > /opt/config.env
-    MYSQL_DATABASE="webapp"
-    MYSQL_USER="user1"
-    MYSQL_PASSWORD="${random_password.password.result}"
-    MYSQL_HOST="${google_sql_database_instance.instance.ip_address[0].ip_address}"
-    EOF
+    if [ ! -f /opt/config.env ]; then
+      cat <<EOF > /opt/config.env
+      MYSQL_DATABASE="webapp"
+      MYSQL_USER="user1"
+      MYSQL_PASSWORD="${random_password.password.result}"
+      MYSQL_HOST="${google_sql_database_instance.instance.ip_address[0].ip_address}"
+EOF
+    else
+      echo "file already exists"
+    fi
     EOT
   }
 

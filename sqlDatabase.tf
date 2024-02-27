@@ -1,6 +1,6 @@
 # random string generation for cloud sql instance name
 resource "random_string" "suffix" {
-  length  = 3
+  length  = var.random_string_len
   special = false
   numeric = false
   upper   = false
@@ -8,15 +8,15 @@ resource "random_string" "suffix" {
 
 # CloudSQL Instance
 resource "google_sql_database_instance" "instance" {
-  name                = "webapp-db-instance-${random_string.suffix.result}"
-  database_version    = "MYSQL_8_0"
+  name                = "${var.google_sql_instance_name}${random_string.suffix.result}"
+  database_version    = var.google_sql_instance_db_version
   deletion_protection = false
 
   settings {
-    tier              = "db-f1-micro"
-    availability_type = "REGIONAL"
-    disk_type         = "PD_SSD"
-    disk_size         = 100
+    tier              = var.google_sql_instance_tier
+    availability_type = var.google_sql_instance_avl_type
+    disk_type         = var.google_sql_instance_disk_type
+    disk_size         = var.google_sql_instance_disk_size
     backup_configuration {
       enabled            = true
       binary_log_enabled = true
@@ -25,16 +25,6 @@ resource "google_sql_database_instance" "instance" {
     ip_configuration {
       ipv4_enabled    = false
       private_network = google_compute_network.vpc_network.self_link
-
-      #   dynamic "authorized_networks" {
-      #     for_each = google_compute_instance.vm_instance
-      #     iterator = vm_instance
-
-      #     content {
-      #       name  = vm_instance.value.name
-      #       value = vm_instance.value.network_interface.0.access_config.0.nat_ip
-      #     }
-      #   }
     }
   }
 
@@ -43,7 +33,7 @@ resource "google_sql_database_instance" "instance" {
 
 # CloudSQL Database
 resource "google_sql_database" "webapp_db" {
-  name     = "webapp"
+  name     = var.google_sql_database_name
   instance = google_sql_database_instance.instance.name
 
   depends_on = [google_sql_database_instance.instance]
@@ -51,7 +41,7 @@ resource "google_sql_database" "webapp_db" {
 
 # CloudSQL Database User with Random Password
 resource "random_password" "password" {
-  length      = 8
+  length      = var.random_password_length
   min_lower   = 1
   min_upper   = 1
   min_special = 1
@@ -59,7 +49,7 @@ resource "random_password" "password" {
 }
 
 resource "google_sql_user" "webapp_user" {
-  name     = "user1"
+  name     = var.google_sql_database_user
   instance = google_sql_database_instance.instance.name
   password = random_password.password.result
 }
