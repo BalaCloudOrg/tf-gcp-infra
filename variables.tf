@@ -117,3 +117,19 @@ variable "tcp_protocol" {
   type    = string
   default = "tcp"
 }
+
+variable "ip_address_range_private_network_access" {
+  description = "Private IP address range for private network access"
+  type        = string
+  default     = "private-ip-range-for-private-network-access"
+}
+
+variable "purpose_vpc_peering" {
+  type    = string
+  default = "VPC_PEERING"
+}
+
+variable "address_type_VPC_peering" {
+  type    = string
+  default = "INTERNAL"
+}
