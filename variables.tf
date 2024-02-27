@@ -133,3 +133,63 @@ variable "address_type_VPC_peering" {
   type    = string
   default = "INTERNAL"
 }
+
+variable "service_networking_service_name" {
+  type = string
+  default = "servicenetworking.googleapis.com"
+}
+
+variable "google_compute_global_add_prefix_len" {
+  type = number
+  default = 16
+} 
+
+variable "random_string_len" {
+  type = number
+  default = 3
+}
+
+variable "google_sql_instance_name" {
+  type = string
+  default = "webapp-db-instance-"
+}
+
+variable "google_sql_instance_db_version" {
+  type = string
+  default = "MYSQL_8_0"
+}
+
+variable "google_sql_instance_tier" {
+  type = string
+  default = "db-f1-micro"
+}
+
+variable "google_sql_instance_avl_type" {
+  type = string
+  default = "REGIONAL"
+}
+
+variable "google_sql_instance_disk_type" {
+  type = string
+  default = "PD_SSD"
+}
+
+variable "google_sql_instance_disk_size" {
+  type = number
+  default = 100
+}
+
+variable "google_sql_database_name" {
+  type = string
+  default = "webapp"
+}
+
+variable "random_password_length" {
+  type = number
+  default = 8
+}
+
+variable "google_sql_database_user" {
+  type = string
+  default = "user1"
+}
