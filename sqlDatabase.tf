@@ -10,7 +10,7 @@ resource "random_string" "suffix" {
 resource "google_sql_database_instance" "instance" {
   name                = "${var.google_sql_instance_name}${random_string.suffix.result}"
   database_version    = var.google_sql_instance_db_version
-  deletion_protection = false
+  deletion_protection = var.google_sql_database_instance_del
 
   settings {
     tier              = var.google_sql_instance_tier
@@ -18,12 +18,12 @@ resource "google_sql_database_instance" "instance" {
     disk_type         = var.google_sql_instance_disk_type
     disk_size         = var.google_sql_instance_disk_size
     backup_configuration {
-      enabled            = true
-      binary_log_enabled = true
+      enabled            = var.google_sql_database_instance_backup_enabled
+      binary_log_enabled = var.google_sql_database_instance_backup_binlog
     }
 
     ip_configuration {
-      ipv4_enabled    = false
+      ipv4_enabled    = var.google_sql_database_instance_ipv4_enabled
       private_network = google_compute_network.vpc_network.self_link
     }
   }
