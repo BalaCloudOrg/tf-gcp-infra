@@ -179,6 +179,26 @@ variable "google_sql_instance_disk_size" {
   default = 100
 }
 
+variable "google_sql_database_instance_del" {
+  type    = bool
+  default = false
+}
+
+variable "google_sql_database_instance_ipv4_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "google_sql_database_instance_backup_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "google_sql_database_instance_backup_binlog" {
+  type    = bool
+  default = true
+}
+
 variable "google_sql_database_name" {
   type    = string
   default = "webapp"
