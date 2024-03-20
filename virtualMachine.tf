@@ -37,6 +37,13 @@ EOF
     EOT
   }
 
+  allow_stopping_for_update = var.com_eng_allow_stop_for_update
+
+  service_account {
+    email  = google_service_account.vm_service_account.email
+    scopes = [var.ser_acc_logging_write_scope, var.ser_acc_monitoring_write_scope]
+  }
+
   tags       = [var.compute_instance_tag]
-  depends_on = [google_compute_network.vpc_network, google_compute_subnetwork.subnet_webapp, google_sql_database_instance.instance]
+  depends_on = [google_compute_network.vpc_network, google_compute_subnetwork.subnet_webapp, google_sql_database_instance.instance, google_service_account.vm_service_account]
 }

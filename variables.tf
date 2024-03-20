@@ -213,3 +213,63 @@ variable "google_sql_database_user" {
   type    = string
   default = "user1"
 }
+
+variable "vm_service_account" {
+  type    = string
+  default = "vm-service-account"
+}
+
+variable "vm_service_acc_display_name" {
+  type    = string
+  default = "VM Service Account - logging"
+}
+
+variable "custom_dns_zone_name" {
+  type    = string
+  default = "my-dns-zone"
+}
+
+variable "custom_domain_name" {
+  type    = string
+  default = "cloudnativewebapp.me."
+}
+
+variable "dns_record_type_A" {
+  type    = string
+  default = "A"
+}
+
+variable "dns_record_ttl" {
+  type    = number
+  default = 300
+}
+
+variable "iam_binding_logging_admin_role" {
+  type    = string
+  default = "roles/logging.admin"
+}
+
+variable "iam_binding_monitoring_writer_role" {
+  type    = string
+  default = "roles/monitoring.metricWriter"
+}
+
+variable "var_service_account" {
+  type    = string
+  default = "serviceAccount:"
+}
+
+variable "ser_acc_logging_write_scope" {
+  type    = string
+  default = "logging-write"
+}
+
+variable "ser_acc_monitoring_write_scope" {
+  type    = string
+  default = "monitoring-write"
+}
+
+variable "com_eng_allow_stop_for_update" {
+  type    = bool
+  default = true
+}
