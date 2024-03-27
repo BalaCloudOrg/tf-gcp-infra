@@ -41,7 +41,7 @@ EOF
 
   service_account {
     email  = google_service_account.vm_service_account.email
-    scopes = [var.ser_acc_logging_write_scope, var.ser_acc_monitoring_write_scope]
+    scopes = [var.ser_acc_logging_write_scope, var.ser_acc_monitoring_write_scope, var.ser_acc_pubsub_scope]
   }
 
   tags       = [var.compute_instance_tag]
