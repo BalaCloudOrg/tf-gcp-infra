@@ -15,3 +15,39 @@ resource "google_project_iam_binding" "monitoring_metric_writer" {
     "${var.var_service_account}${google_service_account.vm_service_account.email}",
   ]
 }
+
+resource "google_project_iam_binding" "pubsub_publisher" {
+  project = var.project_id
+  role    = var.iam_binding_pubsub_publisher
+
+  members = [
+    "${var.var_service_account}${google_service_account.vm_service_account.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "service_account_token_creator" {
+  project = var.project_id
+  role    = var.iam_binding_ser_acc_token_creator
+
+  members = [
+    "${var.var_service_account}${google_service_account.serverless_service_account.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "cloud_sql_client" {
+  project = var.project_id
+  role    = var.iam_binding_cloud_sql_client
+
+  members = [
+    "${var.var_service_account}${google_service_account.serverless_service_account.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "cloud_run_invoker" {
+  project = var.project_id
+  role    = var.iam_binding_cloud_run_invoker
+
+  members = [
+    "${var.var_service_account}${google_service_account.serverless_service_account.email}",
+  ]
+}

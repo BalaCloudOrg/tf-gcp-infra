@@ -48,6 +48,11 @@ variable "routing_mode" {
   type        = string
 }
 
+variable "vpc_route_next_hop" {
+  type    = string
+  default = "default-internet-gateway"
+}
+
 variable "application_port" {
   description = "The port that the application listens to."
   type        = number
@@ -272,4 +277,135 @@ variable "ser_acc_monitoring_write_scope" {
 variable "com_eng_allow_stop_for_update" {
   type    = bool
   default = true
+}
+
+variable "iam_binding_pubsub_publisher" {
+  type    = string
+  default = "roles/pubsub.publisher"
+}
+
+variable "iam_binding_ser_acc_token_creator" {
+  type    = string
+  default = "roles/iam.serviceAccountTokenCreator"
+}
+
+variable "iam_binding_cloud_sql_client" {
+  type    = string
+  default = "roles/cloudsql.client"
+}
+
+variable "iam_binding_cloud_run_invoker" {
+  type    = string
+  default = "roles/run.invoker"
+}
+
+variable "pubsub_topic_name" {
+  type    = string
+  default = "verify_email"
+}
+
+variable "pubsub_storage_region" {
+  type    = string
+  default = "us-east1"
+}
+
+variable "pubsub_retention_duration" {
+  type    = string
+  default = "604800s"
+}
+
+variable "data_existing_bucket_name" {
+  type    = string
+  default = "serverless-cloud-fn"
+}
+
+variable "data_existing_object" {
+  type    = string
+  default = "function-source.zip"
+}
+
+variable "gcloud_fn_name" {
+  type    = string
+  default = "verify-email-function"
+}
+
+variable "gcloud_fn_desc" {
+  type    = string
+  default = "Cloud Function Gen 2 triggered by Pub/Sub for user verification"
+}
+
+variable "gcloud_fn_location" {
+  type    = string
+  default = "us-east1"
+}
+
+variable "gcloud_fn_entry_pt" {
+  type    = string
+  default = "helloPubSub"
+}
+
+variable "gcloud_fn_runtime" {
+  type    = string
+  default = "nodejs20"
+}
+
+variable "gcloud_fn_serv_config_mem" {
+  type    = string
+  default = "128Mi"
+}
+
+variable "gcloud_fn_serv_config_timeout" {
+  type    = number
+  default = 60
+}
+
+
+variable "gcloud_fn_serv_config_ingress" {
+  type    = string
+  default = "ALLOW_ALL"
+}
+
+variable "gcloud_fn_serv_config_egress" {
+  type    = string
+  default = "PRIVATE_RANGES_ONLY"
+}
+
+variable "gcloud_fn_event_trigger_type" {
+  type    = string
+  default = "google.cloud.pubsub.topic.v1.messagePublished"
+}
+
+variable "gcloud_fn_event_trigger_retry" {
+  type    = string
+  default = "RETRY_POLICY_RETRY"
+}
+
+variable "serverless_service_acc" {
+  type    = string
+  default = "serverless-service-account"
+}
+
+variable "serverless_service_acc_display_name" {
+  type    = string
+  default = "Service Account for serverless cloud function"
+}
+
+variable "ser_acc_pubsub_scope" {
+  type    = string
+  default = "https://www.googleapis.com/auth/pubsub"
+}
+
+variable "serverless_vpc_conn_name" {
+  type    = string
+  default = "my-serverless-connector"
+}
+
+variable "serverless_vpc_conn_region" {
+  type    = string
+  default = "us-east1"
+}
+
+variable "serverless_vpc_conn_ip_cidr" {
+  type    = string
+  default = "10.0.2.0/28"
 }

@@ -25,6 +25,14 @@ resource "google_compute_route" "route_for_vpc" {
   name             = var.vpc_route_name
   dest_range       = var.vpc_route_ip
   network          = google_compute_network.vpc_network.id
-  next_hop_gateway = "default-internet-gateway"
+  next_hop_gateway = var.vpc_route_next_hop
 }
 
+resource "google_vpc_access_connector" "serverless_vpc_connector" {
+  name          = var.serverless_vpc_conn_name
+  region        = var.serverless_vpc_conn_region
+  network       = google_compute_network.vpc_network.id
+  ip_cidr_range = var.serverless_vpc_conn_ip_cidr
+
+  depends_on = [google_compute_network.vpc_network]
+}
