@@ -100,7 +100,7 @@ variable "custom_image_type" {
 variable "custom_image_size" {
   description = "The size of the custom image"
   type        = number
-  default     = 100
+  default     = 20
 }
 
 variable "firewall_source_range" {
@@ -408,4 +408,208 @@ variable "serverless_vpc_conn_region" {
 variable "serverless_vpc_conn_ip_cidr" {
   type    = string
   default = "10.0.2.0/28"
+}
+
+variable "ssl_certificate_name" {
+  type    = string
+  default = "ssl-cert"
+}
+
+variable "gcp_reserved_ip_range_1" {
+  type    = string
+  default = "130.211.0.0/22"
+}
+
+variable "gcp_reserved_ip_range_2" {
+  type    = string
+  default = "35.191.0.0/16"
+}
+
+variable "region_health_check_name" {
+  type    = string
+  default = "https-region-health-check"
+}
+
+variable "https_region_health_check_zone" {
+  type    = string
+  default = "us-east1"
+}
+
+variable "health_check_endpoint" {
+  type    = string
+  default = "/healthz"
+}
+variable "health_check_port" {
+  type    = string
+  default = "3000"
+}
+
+variable "health_check_name" {
+  type    = string
+  default = "https-health-check"
+}
+
+variable "instance_template_region" {
+  type    = string
+  default = "us-east1"
+}
+
+variable "instance_template_boot_disk" {
+  type    = bool
+  default = true
+}
+
+variable "ser_acc_cloud_platform_scope" {
+  type    = string
+  default = "cloud-platform"
+}
+
+variable "load_balancer_backend_name" {
+  type    = string
+  default = "load-balancer-backend"
+}
+
+variable "lb_connection_draining" {
+  type    = number
+  default = 0
+}
+
+variable "lb_load_balancing_scheme" {
+  type    = string
+  default = "EXTERNAL_MANAGED"
+}
+
+variable "lb_port_name" {
+  type    = string
+  default = "http"
+}
+
+variable "lb_protocol" {
+  type    = string
+  default = "HTTP"
+}
+
+variable "lb_session_affinity" {
+  type    = string
+  default = "NONE"
+}
+
+variable "lb_timeout_sec" {
+  type    = number
+  default = 30
+}
+
+variable "lb_be_balancing_mode" {
+  type    = string
+  default = "UTILIZATION"
+}
+
+variable "lb_be_capacity_scaler" {
+  type    = number
+  default = 1.0
+}
+
+variable "lb_be_max_utilization" {
+  type    = number
+  default = 0.8
+}
+
+variable "lb_log_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "gc_url_map_name" {
+  type    = string
+  default = "web-app-https"
+}
+
+variable "target_https_proxy_name" {
+  type    = string
+  default = "https-lb-proxy"
+}
+
+variable "global_fw_rule_name" {
+  type    = string
+  default = "https-fw-rule"
+}
+
+variable "global_fw_rule_ip_protocol" {
+  type    = string
+  default = "TCP"
+}
+
+variable "global_fw_rule_lb_scheme" {
+  type    = string
+  default = "EXTERNAL_MANAGED"
+}
+
+variable "global_fw_rule_port_range" {
+  type    = string
+  default = "443"
+}
+
+variable "instance_group_mgr_name" {
+  type    = string
+  default = "my-mig"
+}
+
+variable "instance_group_mgr_zone" {
+  type    = string
+  default = "us-east1"
+}
+
+variable "instance_group_dis_policy_1" {
+  type    = string
+  default = "us-east1-b"
+}
+
+variable "instance_group_dis_policy_2" {
+  type    = string
+  default = "us-east1-c"
+}
+
+variable "instance_group_base_ins_name" {
+  type    = string
+  default = "base-instance"
+}
+
+variable "auto_healing_delay_sec" {
+  type    = number
+  default = 300
+}
+
+variable "named_port_name" {
+  type    = string
+  default = "http"
+}
+
+variable "named_port" {
+  type    = number
+  default = 3000
+}
+
+variable "auto_scaler_name" {
+  type    = string
+  default = "my-autoscaler"
+}
+
+variable "autoscaling_policy_max_replicas" {
+  type    = number
+  default = 6
+}
+
+variable "autoscaling_policy_min_replicas" {
+  type    = number
+  default = 3
+}
+
+variable "autoscaling_policy_cooldown" {
+  type    = number
+  default = 240
+}
+
+variable "auto_scaling_policy_cpu_utilization" {
+  type    = number
+  default = 0.05
 }

@@ -7,5 +7,7 @@ resource "google_dns_record_set" "custom_dns_record" {
   type         = var.dns_record_type_A
   managed_zone = data.google_dns_managed_zone.existing_zone.name
   ttl          = var.dns_record_ttl
-  rrdatas      = [google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip]
+  rrdatas      = [google_compute_global_forwarding_rule.https_fw_rule.ip_address]
+
+  depends_on = [google_compute_global_forwarding_rule.https_fw_rule]
 }
