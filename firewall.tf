@@ -7,7 +7,7 @@ resource "google_compute_firewall" "allow_webapp_traffic" {
     ports    = ["${var.application_port}"]
   }
 
-  source_ranges = [var.firewall_source_range]
+  source_ranges = [var.gcp_reserved_ip_range_1, var.gcp_reserved_ip_range_2]
   target_tags   = [var.compute_instance_tag]
 
   depends_on = [google_compute_network.vpc_network]

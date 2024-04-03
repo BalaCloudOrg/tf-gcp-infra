@@ -1,14 +1,13 @@
-resource "google_compute_instance" "vm_instance" {
+resource "google_compute_region_instance_template" "vm_template" {
   name         = var.instance_name
   machine_type = var.instance_machine_type
-  zone         = var.instance_zone
+  region       = var.instance_template_region
 
-  boot_disk {
-    initialize_params {
-      image = var.custom_image_family
-      type  = var.custom_image_type
-      size  = var.custom_image_size
-    }
+  disk {
+    boot         = var.instance_template_boot_disk
+    source_image = var.custom_image_family
+    disk_type    = var.custom_image_type
+    disk_size_gb = var.custom_image_size
   }
 
   network_interface {
@@ -37,11 +36,9 @@ EOF
     EOT
   }
 
-  allow_stopping_for_update = var.com_eng_allow_stop_for_update
-
   service_account {
     email  = google_service_account.vm_service_account.email
-    scopes = [var.ser_acc_logging_write_scope, var.ser_acc_monitoring_write_scope, var.ser_acc_pubsub_scope]
+    scopes = [var.ser_acc_logging_write_scope, var.ser_acc_monitoring_write_scope, var.ser_acc_pubsub_scope, var.ser_acc_cloud_platform_scope]
   }
 
   tags       = [var.compute_instance_tag]
