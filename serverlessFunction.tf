@@ -1,12 +1,3 @@
-data "google_storage_bucket" "existing_bucket" {
-  name = var.data_existing_bucket_name
-}
-
-data "google_storage_bucket_object" "existing_object" {
-  name   = var.data_existing_object
-  bucket = data.google_storage_bucket.existing_bucket.name
-}
-
 resource "google_cloudfunctions2_function" "user_verification_function" {
   name        = var.gcloud_fn_name
   description = var.gcloud_fn_desc
@@ -18,8 +9,8 @@ resource "google_cloudfunctions2_function" "user_verification_function" {
 
     source {
       storage_source {
-        bucket = data.google_storage_bucket.existing_bucket.name
-        object = data.google_storage_bucket_object.existing_object.name
+        bucket = google_storage_bucket.serverless_cloud_fn.name
+        object = google_storage_bucket_object.zip_file.name
       }
     }
   }
@@ -48,5 +39,5 @@ resource "google_cloudfunctions2_function" "user_verification_function" {
     retry_policy          = var.gcloud_fn_event_trigger_retry
   }
 
-  depends_on = [google_sql_database_instance.instance]
+  depends_on = [google_sql_database_instance.instance, google_storage_bucket.serverless_cloud_fn, google_storage_bucket_object.zip_file]
 }

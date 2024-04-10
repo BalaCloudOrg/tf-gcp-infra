@@ -5,9 +5,12 @@ resource "google_compute_region_instance_template" "vm_template" {
 
   disk {
     boot         = var.instance_template_boot_disk
-    source_image = var.custom_image_family
+    source_image = var.custom_image_family_name
     disk_type    = var.custom_image_type
     disk_size_gb = var.custom_image_size
+    disk_encryption_key {
+      kms_key_self_link = google_kms_crypto_key.compute_instance_key.id
+    }
   }
 
   network_interface {
