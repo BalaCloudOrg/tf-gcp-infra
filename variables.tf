@@ -325,7 +325,7 @@ variable "bucket_object_name" {
 }
 
 variable "bucket_object_source" {
-  type = string
+  type    = string
   default = "/Users/santhosh/Downloads/function-source.zip"
 }
 
@@ -620,69 +620,69 @@ variable "auto_scaling_policy_cpu_utilization" {
 }
 
 variable "serverless_cloud_fn_name" {
-  type = string
+  type    = string
   default = "serverless-cloud-fn-"
 }
 
 variable "bucket_location" {
-  type = string
+  type    = string
   default = "us-east1"
 }
 
 variable "key_ring_name" {
-  type = string
+  type    = string
   default = "webapp-key-ring-"
 }
 
 variable "key_ring_location" {
-  type = string
+  type    = string
   default = "us-east1"
 }
 
 variable "compute_instance_key_name" {
-  type = string
+  type    = string
   default = "compute-instance-key-"
 }
 
 variable "cloud_sql_key_name" {
-  type = string
+  type    = string
   default = "cloud-sql-key-"
 }
 
 variable "bucket_storage_key" {
-  type = string
+  type    = string
   default = "serverless-cloud-fn-"
 }
 
 variable "key_purpose" {
-  type = string
+  type    = string
   default = "ENCRYPT_DECRYPT"
 }
 
 variable "key_rotation_period" {
-  type = string
+  type    = string
   default = "2592000s"
 }
 
 variable "iam_binding_key_encrypt_decrypt" {
-  type = string
+  type    = string
   default = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 }
 
 variable "key_service_acc_prefix" {
-  type = string
+  type    = string
   default = "serviceAccount:service-"
 }
 
 variable "sql_sa_key_suffix" {
-  type = string
+  type    = string
   default = "@gcp-sa-cloud-sql.iam.gserviceaccount.com"
 }
 variable "compute_sa_key_suffix" {
-  type = string
+  type    = string
   default = "@compute-system.iam.gserviceaccount.com"
 }
 variable "storage_sa_key_suffix" {
-  type = string
+  type    = string
   default = "@gs-project-accounts.iam.gserviceaccount.com"
 }
