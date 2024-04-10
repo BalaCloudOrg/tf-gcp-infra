@@ -59,7 +59,7 @@ variable "application_port" {
   default     = 3000
 }
 
-variable "custom_image_family" {
+variable "custom_image_family_name" {
   description = "The self-link of the custom image for the Compute Engine instance."
   type        = string
 }
@@ -319,9 +319,14 @@ variable "data_existing_bucket_name" {
   default = "serverless-cloud-fn"
 }
 
-variable "data_existing_object" {
+variable "bucket_object_name" {
   type    = string
   default = "function-source.zip"
+}
+
+variable "bucket_object_source" {
+  type = string
+  default = "/Users/santhosh/Downloads/function-source.zip"
 }
 
 variable "gcloud_fn_name" {
@@ -612,4 +617,72 @@ variable "autoscaling_policy_cooldown" {
 variable "auto_scaling_policy_cpu_utilization" {
   type    = number
   default = 0.05
+}
+
+variable "serverless_cloud_fn_name" {
+  type = string
+  default = "serverless-cloud-fn-"
+}
+
+variable "bucket_location" {
+  type = string
+  default = "us-east1"
+}
+
+variable "key_ring_name" {
+  type = string
+  default = "webapp-key-ring-"
+}
+
+variable "key_ring_location" {
+  type = string
+  default = "us-east1"
+}
+
+variable "compute_instance_key_name" {
+  type = string
+  default = "compute-instance-key-"
+}
+
+variable "cloud_sql_key_name" {
+  type = string
+  default = "cloud-sql-key-"
+}
+
+variable "bucket_storage_key" {
+  type = string
+  default = "serverless-cloud-fn-"
+}
+
+variable "key_purpose" {
+  type = string
+  default = "ENCRYPT_DECRYPT"
+}
+
+variable "key_rotation_period" {
+  type = string
+  default = "2592000s"
+}
+
+variable "iam_binding_key_encrypt_decrypt" {
+  type = string
+  default = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+}
+
+variable "key_service_acc_prefix" {
+  type = string
+  default = "serviceAccount:service-"
+}
+
+variable "sql_sa_key_suffix" {
+  type = string
+  default = "@gcp-sa-cloud-sql.iam.gserviceaccount.com"
+}
+variable "compute_sa_key_suffix" {
+  type = string
+  default = "@compute-system.iam.gserviceaccount.com"
+}
+variable "storage_sa_key_suffix" {
+  type = string
+  default = "@gs-project-accounts.iam.gserviceaccount.com"
 }

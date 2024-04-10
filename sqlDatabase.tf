@@ -28,7 +28,9 @@ resource "google_sql_database_instance" "instance" {
     }
   }
 
-  depends_on = [google_service_networking_connection.private_vpc_connection]
+  encryption_key_name = google_kms_crypto_key.cloud_sql_key.id
+
+  depends_on = [google_service_networking_connection.private_vpc_connection, google_kms_crypto_key.cloud_sql_key, google_kms_crypto_key_iam_binding.crypto_key_sql, google_kms_crypto_key_version.cloud_sql_key_version]
 }
 
 # CloudSQL Database

@@ -51,3 +51,33 @@ resource "google_project_iam_binding" "cloud_run_invoker" {
     "${var.var_service_account}${google_service_account.serverless_service_account.email}",
   ]
 }
+
+data "google_project" "current" {}
+
+resource "google_kms_crypto_key_iam_binding" "crypto_key_sql" {
+  crypto_key_id = google_kms_crypto_key.cloud_sql_key.id
+  role          = var.iam_binding_key_encrypt_decrypt
+
+  members = [
+    "${var.key_service_acc_prefix}${data.google_project.current.number}${var.sql_sa_key_suffix}",
+  ]
+}
+
+
+resource "google_kms_crypto_key_iam_binding" "crypto_key_vm" {
+  crypto_key_id = google_kms_crypto_key.compute_instance_key.id
+  role          = var.iam_binding_key_encrypt_decrypt
+
+  members = [
+    "${var.key_service_acc_prefix}${data.google_project.current.number}${var.compute_sa_key_suffix}",
+  ]
+}
+
+resource "google_kms_crypto_key_iam_binding" "crypto_key_bucket" {
+  crypto_key_id = google_kms_crypto_key.bucket_storage_key.id
+  role          = var.iam_binding_key_encrypt_decrypt
+
+  members = [
+    "${var.key_service_acc_prefix}${data.google_project.current.number}${var.storage_sa_key_suffix}",
+  ]
+}
